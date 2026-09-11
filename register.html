@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form — Gaurav Coaching Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Mulish:wght@400;500;600&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#2E1A47;
+    --gold:#E07A3F;
+    --cream:#FBF8F4;
+    --teal:#6B4E8A;
+    --ink:#1C1420;
+    --cream-soft:#EDE2F2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Mulish',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;}
+  h1,h2,h3{font-family:'Zilla Slab',serif;color:var(--navy);line-height:1.2;}
+  .mono{font-family:'Fira Code',monospace;letter-spacing:0.03em;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+  header{background:var(--navy);padding:18px 0;position:sticky;top:0;z-index:50;}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;}
+  header .wrap{position:relative;}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px;z-index:60;}
+  .menu-toggle span{display:block;width:24px;height:2px;background:var(--cream);transition:transform 0.2s ease, opacity 0.2s ease;}
+  .menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-toggle.open span:nth-child(2){opacity:0;}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  nav a.active-link{color:var(--gold);}
+
+  .field-error{border-color:#C0392B !important;box-shadow:0 0 0 3px rgba(192,57,43,0.12) !important;}
+  .field-error-msg{color:#C0392B;font-size:0.78rem;margin-top:-10px;margin-bottom:14px;}
+  .form-message{padding:12px 16px;border-radius:4px;font-size:0.88rem;margin-bottom:20px;}
+  .form-message.success{background:#E7F3E8;color:#2E7D32;border:1px solid #B7DDB9;}
+  .logo{color:var(--cream);font-family:'Zilla Slab',serif;font-size:1.25rem;font-weight:700;}
+  .logo span{color:var(--gold);}
+  nav a{color:var(--cream-soft);margin-left:26px;font-size:0.9rem;font-weight:500;}
+  nav a:hover{color:var(--gold);}
+  nav a.btn-nav{background:var(--gold);color:#fff;padding:9px 18px;border-radius:2px;font-weight:700;}
+
+  .page-hero{background:var(--navy);color:var(--cream);padding:56px 0 64px;text-align:center;}
+  .page-hero .eyebrow{
+    font-family:'Fira Code',monospace;color:var(--gold);font-size:0.78rem;
+    letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px;display:block;
+    opacity:0;animation:fadeUp 0.7s ease forwards;animation-delay:0.05s;
+  }
+  .page-hero h1{
+    color:var(--cream);font-size:clamp(1.9rem,4.5vw,2.6rem);
+    opacity:0;animation:fadeUp 0.7s ease forwards;animation-delay:0.18s;
+  }
+  .page-hero p{
+    color:var(--cream-soft);max-width:480px;margin:16px auto 0;
+    opacity:0;animation:fadeUp 0.7s ease forwards;animation-delay:0.32s;
+  }
+
+  .section{padding:56px 0 76px;}
+
+  .form-card{
+    max-width:720px;margin:0 auto;
+    background:#fff;border:1px solid #E5D9EE;border-radius:6px;
+    padding:40px;
+    opacity:0;animation:fadeUp 0.6s ease forwards;
+  }
+
+  .form-group-title{
+    font-family:'Fira Code',monospace;
+    font-size:0.75rem;color:var(--teal);
+    letter-spacing:0.1em;text-transform:uppercase;
+    margin:28px 0 16px;
+    padding-bottom:8px;
+    border-bottom:1px solid #E5D9EE;
+  }
+  .form-group-title:first-of-type{margin-top:0;}
+
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;}
+  .field input,.field select,.field textarea{
+    width:100%;padding:12px 14px;border:1px solid #DDD0E8;border-radius:3px;
+    font-family:'Mulish',sans-serif;font-size:0.92rem;background:var(--cream);color:var(--ink);
+    transition:border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(107,78,138,0.15);
+  }
+  .field textarea{resize:vertical;min-height:90px;}
+
+  .radio-group{display:flex;gap:20px;flex-wrap:wrap;}
+  .radio-group label{
+    display:flex;align-items:center;gap:6px;
+    font-size:0.9rem;font-weight:500;color:#444;
+  }
+
+  .upload-box{
+    border:1.5px dashed #DDD0E8;border-radius:4px;
+    padding:24px;text-align:center;background:var(--cream-soft);
+    font-size:0.85rem;color:var(--teal);
+  }
+  .upload-box .mono{display:block;margin-top:4px;font-size:0.75rem;color:#888;}
+
+  .checkbox-line{
+    display:flex;align-items:flex-start;gap:8px;
+    font-size:0.86rem;color:#555;margin:22px 0;
+  }
+  .checkbox-line input{margin-top:3px;}
+
+  .btn{
+    display:inline-block;width:100%;padding:15px;border-radius:3px;font-weight:700;
+    font-size:0.96rem;border:none;cursor:pointer;transition:transform 0.15s ease;
+  }
+  .btn-primary{background:var(--gold);color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);}
+
+  .switch-line{text-align:center;font-size:0.86rem;color:#555;margin-top:18px;}
+  .switch-line a{color:var(--teal);font-weight:700;}
+  .switch-line a:hover{color:var(--gold);}
+
+  footer{background:var(--ink);color:var(--cream-soft);padding:40px 0 24px;font-size:0.85rem;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:28px;}
+  .footer-grid h4{color:var(--cream);font-size:0.95rem;margin-bottom:12px;font-family:'Mulish',sans-serif;}
+  .footer-grid p{color:var(--cream-soft);font-size:0.85rem;}
+  .footer-grid ul{list-style:none;}
+  .footer-grid li{margin-bottom:8px;}
+  .footer-grid a:hover{color:var(--gold);}
+  .footer-bottom{border-top:1px solid rgba(237,226,242,0.15);padding-top:18px;text-align:center;color:#8a8390;}
+  footer a{color:var(--gold);}
+
+  @media(max-width:640px){
+    .menu-toggle{display:flex;}
+    nav{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      background:var(--navy);flex-direction:column;
+      padding:14px 24px 22px;gap:16px;
+      box-shadow:0 10px 20px rgba(0,0,0,0.15);
+    }
+    nav.nav-open{display:flex;}
+    nav a{margin-left:0;}
+    .footer-grid{grid-template-columns:1fr;}
+    .row{grid-template-columns:1fr;}
+    .form-card{padding:28px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Gaurav <span>Coaching</span></div>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="courses.html">Courses</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="btn-nav">Login</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Admission</span>
+    <h1>Registration Form</h1>
+    <p>Course admission ke liye neeche di gayi details bhariye — hum jald hi contact karenge.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <form class="form-card" id="register-form">
+
+      <div class="form-group-title">Personal Details</div>
+      <div class="row">
+        <div class="field">
+          <label for="fname">Full Name</label>
+          <input type="text" id="fname" placeholder="Apna naam likhein">
+        </div>
+        <div class="field">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Gender</label>
+          <div class="radio-group">
+            <label><input type="radio" name="gender"> Male</label>
+            <label><input type="radio" name="gender"> Female</label>
+            <label><input type="radio" name="gender"> Other</label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="father">Father's / Guardian's Name</label>
+          <input type="text" id="father" placeholder="Guardian ka naam">
+        </div>
+      </div>
+
+      <div class="form-group-title">Contact Details</div>
+      <div class="row">
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+91 00000 00000">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="field">
+        <label for="address">Address</label>
+        <textarea id="address" placeholder="Poora address likhein"></textarea>
+      </div>
+
+      <div class="form-group-title">Course Details</div>
+      <div class="row">
+        <div class="field">
+          <label for="course">Select Course</label>
+          <select id="course">
+            <option value="">-- Choose a course --</option>
+            <option>Computer Basics & Office</option>
+            <option>NIOS / Open Board Admission</option>
+            <option>Digital Marketing</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="batch">Preferred Batch</label>
+          <select id="batch">
+            <option value="">-- Choose a batch --</option>
+            <option>Morning (Mon/Wed/Fri)</option>
+            <option>Evening (Tue/Thu/Sat)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="qualification">Last Qualification</label>
+        <input type="text" id="qualification" placeholder="Jaise: 10th, 12th, Graduate">
+      </div>
+
+      <div class="form-group-title">Documents</div>
+      <div class="field">
+        <label>Photo & ID Proof (Aadhar / Marksheet)</label>
+        <div class="upload-box">
+          Files yahan drag karein ya click karke upload karein
+          <span class="mono">PDF, JPG, PNG — max 5MB each</span>
+        </div>
+      </div>
+
+      <label class="checkbox-line">
+        <input type="checkbox" data-required>
+        Maine di gayi jaankari sahi hai aur institute ke terms & conditions se agree karta/karti hoon.
+      </label>
+
+      <button type="submit" class="btn btn-primary">Submit Registration</button>
+
+      <p class="switch-line">Pehle se account hai? <a href="login.html">Login karein</a></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Gaurav Coaching Institute</h4>
+        <p>Computer courses, NIOS admission counselling aur digital marketing training — Kanpur, Uttar Pradesh.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+          <li><a href="register.html">Registration Form</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Gaurav Coaching Institute. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaurav Coaching Institute — Computer Courses & NIOS Admission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Mulish:wght@400;500;600&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#2E1A47;
+    --gold:#E07A3F;
+    --cream:#FBF8F4;
+    --teal:#6B4E8A;
+    --ink:#1C1420;
+    --cream-soft:#EDE2F2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Mulish',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;}
+  h1,h2,h3{font-family:'Zilla Slab',serif;color:var(--navy);line-height:1.15;}
+  .mono{font-family:'Fira Code',monospace;letter-spacing:0.03em;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+  /* Header */
+  header{background:var(--navy);padding:18px 0;position:sticky;top:0;z-index:50;}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;}
+  header .wrap{position:relative;}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px;z-index:60;}
+  .menu-toggle span{display:block;width:24px;height:2px;background:var(--cream);transition:transform 0.2s ease, opacity 0.2s ease;}
+  .menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-toggle.open span:nth-child(2){opacity:0;}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  nav a.active-link{color:var(--gold);}
+
+  .field-error{border-color:#C0392B !important;box-shadow:0 0 0 3px rgba(192,57,43,0.12) !important;}
+  .field-error-msg{color:#C0392B;font-size:0.78rem;margin-top:-10px;margin-bottom:14px;}
+  .form-message{padding:12px 16px;border-radius:4px;font-size:0.88rem;margin-bottom:20px;}
+  .form-message.success{background:#E7F3E8;color:#2E7D32;border:1px solid #B7DDB9;}
+  .logo{color:var(--cream);font-family:'Zilla Slab',serif;font-size:1.3rem;font-weight:700;}
+  .logo span{color:var(--gold);}
+  nav a{color:var(--cream-soft);margin-left:26px;font-size:0.9rem;font-weight:500;}
+  nav a:hover{color:var(--gold);}
+  nav a.btn-nav{background:var(--gold);color:#fff;padding:9px 18px;border-radius:2px;font-weight:700;}
+
+  /* Hero */
+  .hero{background:var(--navy);color:var(--cream);padding:80px 0 100px;position:relative;overflow:hidden;}
+  .hero::after{
+    content:"";position:absolute;right:-60px;top:-60px;
+    width:280px;height:280px;border:1px solid rgba(224,122,63,0.3);border-radius:50%;
+  }
+  .eyebrow{
+    font-family:'Fira Code',monospace;color:var(--gold);
+    font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;
+    margin-bottom:16px;display:block;
+  }
+  .hero .eyebrow,.hero h1,.hero p,.hero .cta-row{opacity:0;animation:fadeUp 0.7s ease forwards;}
+  .hero .eyebrow{animation-delay:0.05s;}
+  .hero h1{animation-delay:0.18s;}
+  .hero p{animation-delay:0.32s;}
+  .hero .cta-row{animation-delay:0.46s;}
+  .hero h1{color:var(--cream);font-size:clamp(2.2rem,5vw,3.4rem);max-width:640px;font-weight:700;}
+  .hero p{max-width:520px;margin-top:20px;color:var(--cream-soft);font-size:1.05rem;}
+  .cta-row{margin-top:34px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:14px 28px;border-radius:2px;font-weight:700;font-size:0.95rem;transition:transform 0.15s ease;}
+  .btn-primary{background:var(--gold);color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-outline{border:1px solid rgba(251,248,244,0.4);color:var(--cream);}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* Ticker */
+  .strip{background:var(--gold);color:#fff;overflow:hidden;}
+  .strip-inner{
+    display:flex;gap:48px;padding:12px 0;white-space:nowrap;
+    font-family:'Fira Code',monospace;font-size:0.82rem;font-weight:500;
+    animation:scroll 22s linear infinite;
+  }
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* Section */
+  .section{padding:76px 0;}
+  .section-head{max-width:580px;margin-bottom:44px;}
+  .section-head.center{margin:0 auto 44px;text-align:center;}
+  .section-head .eyebrow{color:var(--teal);}
+  .section-head h2{font-size:2rem;}
+  .section-head p{color:#555;margin-top:12px;}
+
+  /* About */
+  .about{background:#fff;}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .about-visual{
+    background:var(--cream-soft);border-radius:6px;height:280px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fira Code',monospace;color:var(--navy);font-size:0.85rem;
+    border:1px solid #E5D9EE;
+  }
+  .about-text p{color:#555;margin-bottom:14px;}
+  .about-list{list-style:none;margin-top:18px;}
+  .about-list li{padding-left:26px;position:relative;margin-bottom:10px;color:#444;font-size:0.94rem;}
+  .about-list li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700;}
+
+  /* Courses */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
+  .card{
+    background:#fff;border:1px solid #E5D9EE;padding:28px 24px;border-radius:4px;
+    transition:border-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    opacity:0;animation:fadeUp 0.6s ease forwards;
+  }
+  .card:nth-child(1){animation-delay:0.05s;}
+  .card:nth-child(2){animation-delay:0.18s;}
+  .card:nth-child(3){animation-delay:0.31s;}
+  .card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,0.08);}
+  .card .num{font-family:'Fira Code',monospace;color:var(--teal);font-size:0.8rem;display:block;margin-bottom:10px;}
+  .card h3{font-size:1.15rem;margin-bottom:8px;}
+  .card p{color:#555;font-size:0.92rem;}
+
+  /* Why choose us */
+  .why{background:var(--navy);color:var(--cream);}
+  .why .section-head h2,.why .section-head .eyebrow{color:var(--cream);}
+  .why .section-head .eyebrow{color:var(--gold);}
+  .why .section-head p{color:var(--cream-soft);}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;}
+  .why-item .icon{
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(224,122,63,0.2);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fira Code',monospace;margin-bottom:14px;
+  }
+  .why-item h3{color:var(--cream);font-size:1.05rem;margin-bottom:6px;}
+  .why-item p{color:var(--cream-soft);font-size:0.9rem;}
+
+  /* Trust bar */
+  .trust{background:var(--cream-soft);padding:40px 0;border-top:1px solid #E5D9EE;border-bottom:1px solid #E5D9EE;}
+  .trust .wrap{display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center;}
+  .trust-item .big{font-family:'Zilla Slab',serif;font-size:2rem;color:var(--navy);font-weight:700;}
+  .trust-item .label{font-family:'Fira Code',monospace;font-size:0.75rem;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;}
+
+  /* Testimonials */
+  .testimonial-card{background:#fff;border:1px solid #E5D9EE;border-radius:4px;padding:26px;}
+  .testimonial-card p{color:#444;font-size:0.94rem;margin-bottom:16px;font-style:italic;}
+  .testi-person{display:flex;align-items:center;gap:12px;}
+  .testi-avatar{
+    width:38px;height:38px;border-radius:50%;background:var(--teal);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fira Code',monospace;font-size:0.8rem;font-weight:600;
+  }
+  .testi-name{font-weight:700;color:var(--navy);font-size:0.9rem;}
+  .testi-role{color:#888;font-size:0.8rem;}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid #E5D9EE;padding:20px 0;}
+  .faq-item h3{font-size:1.02rem;color:var(--navy);margin-bottom:8px;font-family:'Mulish',sans-serif;font-weight:700;}
+  .faq-item p{color:#555;font-size:0.9rem;}
+
+  /* CTA band */
+  .cta-band{background:var(--navy);color:var(--cream);text-align:center;padding:64px 24px;}
+  .cta-band h2{color:var(--cream);font-size:1.9rem;}
+  .cta-band p{color:var(--cream-soft);margin:14px 0 30px;}
+
+  footer{background:var(--ink);color:var(--cream-soft);padding:40px 0 24px;font-size:0.85rem;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:28px;}
+  .footer-grid h4{color:var(--cream);font-size:0.95rem;margin-bottom:12px;font-family:'Mulish',sans-serif;}
+  .footer-grid p{color:var(--cream-soft);font-size:0.85rem;}
+  .footer-grid ul{list-style:none;}
+  .footer-grid li{margin-bottom:8px;}
+  .footer-grid a:hover{color:var(--gold);}
+  .footer-bottom{border-top:1px solid rgba(237,226,242,0.15);padding-top:18px;text-align:center;color:#8a8390;}
+  footer a.gold{color:var(--gold);}
+
+  .enquiry{background:var(--cream-soft);}
+  .enquiry-card{
+    max-width:640px;margin:0 auto;
+    background:#fff;border:1px solid #E5D9EE;border-radius:6px;
+    padding:36px;
+    opacity:0;animation:fadeUp 0.6s ease forwards;
+  }
+  .enquiry-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .enquiry .field{margin-bottom:16px;}
+  .enquiry .field label{display:block;font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:6px;}
+  .enquiry .field input,.enquiry .field select,.enquiry .field textarea{
+    width:100%;padding:12px 14px;border:1px solid #DDD0E8;border-radius:3px;
+    font-family:'Mulish',sans-serif;font-size:0.92rem;background:var(--cream);color:var(--ink);
+    transition:border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .enquiry .field input:focus,.enquiry .field select:focus,.enquiry .field textarea:focus{
+    outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(107,78,138,0.15);
+  }
+  .enquiry .field textarea{resize:vertical;min-height:80px;}
+  .enquiry .btn-primary{width:100%;border:none;cursor:pointer;}
+
+  @media(max-width:720px){
+    .menu-toggle{display:flex;}
+    nav{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      background:var(--navy);flex-direction:column;
+      padding:14px 24px 22px;gap:16px;
+      box-shadow:0 10px 20px rgba(0,0,0,0.15);
+    }
+    nav.nav-open{display:flex;}
+    nav a{margin-left:0;}
+    .about-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .enquiry-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Gaurav <span>Coaching</span></div>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="courses.html">Courses</a>
+      <a href="#faq">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="btn-nav">Login</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Kanpur • Computer Courses & NIOS Counselling</span>
+    <h1>Seekhiye skills jo career banaye, guidance jo bharosa jagaye.</h1>
+    <p>Computer courses, NIOS/open board admission counselling aur digital marketing training — sab ek hi jagah, practical aur beginner-friendly tareeke se.</p>
+    <div class="cta-row">
+      <a href="register.html" class="btn btn-primary">Admission Enquiry</a>
+      <a href="#courses" class="btn btn-outline">Courses Dekhein</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span>BATCH 01 — Mon/Wed/Fri — Morning</span>
+    <span>BATCH 02 — Tue/Thu/Sat — Evening</span>
+    <span>NIOS ADMISSION — Open Now</span>
+    <span>BATCH 01 — Mon/Wed/Fri — Morning</span>
+    <span>BATCH 02 — Tue/Thu/Sat — Evening</span>
+    <span>NIOS ADMISSION — Open Now</span>
+  </div>
+</div>
+
+<section class="section about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual">Institute Photo / Illustration</div>
+      <div class="about-text">
+        <span class="eyebrow" style="color:var(--teal);">Who We Are</span>
+        <h2 style="font-size:1.9rem;margin-bottom:14px;">Kanpur ka bharosemand computer coaching institute</h2>
+        <p>Gaurav Coaching Institute pichle kai saalon se students ko computer skills, digital literacy aur NIOS admission process me guide kar raha hai — practical training aur one-on-one support ke saath.</p>
+        <ul class="about-list">
+          <li>Experienced aur friendly trainers</li>
+          <li>Chhote batches, personal attention</li>
+          <li>NIOS admission documentation me full support</li>
+          <li>Affordable fees, flexible timing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="courses">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow mono">Courses</span>
+      <h2>Jo sikhna hai, wahin se shuru karo</h2>
+      <p>Basic computer se leke digital marketing tak — har course hands-on practice ke saath.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>Computer Basics & Office</h3>
+        <p>Typing, MS Office, internet aur digital literacy ki poori foundation.</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>NIOS / Open Board Admission</h3>
+        <p>10th/12th admission counselling, documentation aur form filling guidance.</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>Digital Marketing</h3>
+        <p>SEO, social media aur ads ka practical training real projects ke saath.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow mono">Why Us</span>
+      <h2>Hum different kyu hain</h2>
+      <p>Sirf classes nahi — poora guidance system jo tumhe result tak le jaata hai.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="icon">01</div>
+        <h3>Practical Learning</h3>
+        <p>Har topic hands-on exercises ke saath sikhaya jaata hai, sirf theory nahi.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">02</div>
+        <h3>Small Batches</h3>
+        <p>Har student ko individual attention milta hai, doubt clear karne ka pura time.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">03</div>
+        <h3>Admission Support</h3>
+        <p>NIOS aur open board admission ki poori process me end-to-end guidance.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">04</div>
+        <h3>Flexible Timing</h3>
+        <p>Morning aur evening dono batches available, apni suvidha ke hisaab se choose karein.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-item">
+      <div class="big">500+</div>
+      <div class="label">Students Guided</div>
+    </div>
+    <div class="trust-item">
+      <div class="big">3</div>
+      <div class="label">Core Courses</div>
+    </div>
+    <div class="trust-item">
+      <div class="big">2</div>
+      <div class="label">Daily Batches</div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow mono" style="color:var(--teal);">Testimonials</span>
+      <h2>Students kya kehte hain</h2>
+    </div>
+    <div class="grid">
+      <div class="testimonial-card">
+        <p>"NIOS admission ka pura process itna asaan lagaa kyunki poori guidance yahin mil gayi."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">RA</div>
+          <div>
+            <div class="testi-name">Riya Agarwal</div>
+            <div class="testi-role">NIOS Student</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Digital marketing course ke baad maine apna khud ka freelance kaam shuru kar diya."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">AK</div>
+          <div>
+            <div class="testi-name">Amit Kumar</div>
+            <div class="testi-role">Digital Marketing Batch</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Trainers bahut patient hain, har doubt clear hone tak samjhate hain."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">SP</div>
+          <div>
+            <div class="testi-name">Sneha Pandey</div>
+            <div class="testi-role">Computer Basics Batch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="background:#fff;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow mono">FAQ</span>
+      <h2>Aksar puche jaane wale sawal</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Admission ke liye kya documents chahiye?</h3>
+        <p>Aadhar card, pichli marksheet aur passport size photo — baaki documentation me hum guide karte hain.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Kya batch timing flexible hai?</h3>
+        <p>Haan, morning aur evening dono batches available hain — apni suvidha ke hisaab se choose kar sakte ho.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Fees kitni hai?</h3>
+        <p>Course ke hisaab se fees alag hai — exact details ke liye contact form fill karein ya call karein.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Kya certificate milta hai course complete karne par?</h3>
+        <p>Haan, har course completion par institute ka certificate diya jaata hai.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section enquiry">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow mono" style="color:var(--teal);">Quick Enquiry</span>
+      <h2>Ek chhota sa form bhariye</h2>
+      <p>Hum jald hi aapse contact karenge admission details ke saath.</p>
+    </div>
+    <form class="enquiry-card" id="enquiry-form">
+      <div class="enquiry-row">
+        <div class="field">
+          <label for="eq-name">Full Name</label>
+          <input type="text" id="eq-name" placeholder="Apna naam likhein">
+        </div>
+        <div class="field">
+          <label for="eq-phone">Phone Number</label>
+          <input type="tel" id="eq-phone" placeholder="+91 00000 00000">
+        </div>
+      </div>
+      <div class="field">
+        <label for="eq-course">Interested Course</label>
+        <select id="eq-course">
+          <option value="">-- Choose a course --</option>
+          <option>Computer Basics & Office</option>
+          <option>NIOS / Open Board Admission</option>
+          <option>Digital Marketing</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="eq-message">Message (optional)</label>
+        <textarea id="eq-message" placeholder="Koi sawal ho to yahan likhein..." data-optional="true"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Enquiry Bhejein</button>
+    </form>
+  </div>
+</section>
+
+<section class="cta-band" id="admission">
+  <h2>Admission ke liye ready ho?</h2>
+  <p>Ek call kariye, seat confirm kariye — process bilkul simple hai.</p>
+  <a href="register.html" class="btn btn-primary">Registration Form Bharein</a>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Gaurav Coaching Institute</h4>
+        <p>Computer courses, NIOS admission counselling aur digital marketing training — Kanpur, Uttar Pradesh.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+          <li><a href="register.html">Registration Form</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Gaurav Coaching Institute. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
